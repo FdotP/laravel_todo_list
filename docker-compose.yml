@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  # Kontener z PHP i Apache
+  app:
+    build: .
+    container_name: laravel-app
+    image: laravel-app:latest
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www/html
+    networks:
+      - laravel-network
+    depends_on:
+      - db
+    environment:
+      - DB_CONNECTION=mysql
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=laravel
+      - DB_USERNAME=laraveluser
+      - DB_PASSWORD=password
+
+  # Kontener z bazą danych MySQL
+  db:
+    image: mysql:5.7
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: laraveluser
+      MYSQL_PASSWORD: password
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - laravel-network
+
+volumes:
+  db-data:
+
+networks:
+  laravel-network:
+    driver: bridge
