@@ -21,8 +21,8 @@ Route::post('/task/{id}/generate-link', [TasksController::class, 'generateShareL
 
 Route::get('/tasks/check/{id}', [TasksController::class, 'viewTask'])->name('tasks.check');
 
-Route::get('auth/google', [GoogleCalendarController::class, 'redirectToGoogle'])->name('auth.google')->middleware(['auth', 'verified']);; 
-Route::get('auth/google/callback', [GoogleCalendarController::class, 'handleGoogleCallback'])->middleware(['auth', 'verified']);;
+Route::get('auth/google', [GoogleCalendarController::class, 'redirectToGoogle'])->name('auth.google'); 
+Route::get('auth/google/callback', [GoogleCalendarController::class, 'handleGoogleCallback']);
 
 
 
