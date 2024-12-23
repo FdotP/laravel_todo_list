@@ -20,10 +20,7 @@ class GoogleCalendarController extends Controller
 		return redirect('/tasks')->with('success', 'Google Calendar connected!');    
 	} 
 
-    public function showEvents() {    
-        $events = $this->googleService->listEvents();    
-        return view('events.index', compact('events')); 
-    }
+
 
     public function storeEvent(Request $request) {    
         $eventData = [        
